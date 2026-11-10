@@ -11,7 +11,7 @@ final readonly class Fleet
 {
     public function __construct(
         public Uuid $id,
-        public Collection $starShips,
+        public Collection $starships,
     )
     {
     }

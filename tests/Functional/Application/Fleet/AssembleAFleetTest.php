@@ -45,7 +45,7 @@ final class AssembleAFleetTest extends TestCase
     private function enoughCapacityForThePassengers(int $numberOfPassengers): Callback
     {
         return self::callback(static fn (Fleet $fleet): true => $fleet
-                ->starShips
+                ->starships
                 ->map(static fn (StarShip $starShip): int => $starShip->capacity)
                 ->sum() >= $numberOfPassengers,
         );
@@ -55,7 +55,7 @@ final class AssembleAFleetTest extends TestCase
     {
         return self::callback(static fn (Fleet $fleet): true
             => $fleet
-            ->starShips
+            ->starships
             ->filter(static fn (StarShip $starShip): true => $starShip->capacity > 0)
             ->isNotEmpty(),
         );
@@ -65,7 +65,7 @@ final class AssembleAFleetTest extends TestCase
     {
         return self::callback(static fn (Fleet $fleet): true
             => $fleet
-            ->starShips
+            ->starships
             ->filter(static fn (StarShip $starShip): true => ($starShip->cargoCapacity <=> AssembleAFleet::MINIMAL_CARGO_CAPACITY) >= 0)
             ->isNotEmpty(),
         );
