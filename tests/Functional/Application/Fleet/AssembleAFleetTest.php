@@ -35,7 +35,7 @@ final class AssembleAFleetTest extends KernelTestCase
 
     private function enoughCapacityForThePassengers(int $numberOfPassengers): Callback
     {
-        return self::callback(static fn (Fleet $fleet): true => $fleet
+        return self::callback(static fn (Fleet $fleet): bool => $fleet
                 ->starships
                 ->map(static fn (StarShip $starShip): int => $starShip->capacity)
                 ->sum() >= $numberOfPassengers,
@@ -44,21 +44,19 @@ final class AssembleAFleetTest extends KernelTestCase
 
     private function allStarShipHasPassengersCapacity(): Callback
     {
-        return self::callback(static fn (Fleet $fleet): true
+        return self::callback(static fn (Fleet $fleet): bool
             => $fleet
             ->starships
-            ->filter(static fn (StarShip $starShip): true => $starShip->capacity > 0)
-            ->isNotEmpty(),
+            ->every(static fn (StarShip $starShip): bool => $starShip->capacity > 0),
         );
     }
 
     private function allHasEnoughCargoCapacity(): Callback
     {
-        return self::callback(static fn (Fleet $fleet): true
+        return self::callback(static fn (Fleet $fleet): bool
             => $fleet
             ->starships
-            ->filter(static fn (StarShip $starShip): true => ($starShip->cargoCapacity <=> AssembleAFleet::MINIMAL_CARGO_CAPACITY) >= 0)
-            ->isNotEmpty(),
+            ->every(static fn (StarShip $starShip): bool => $starShip->cargoCapacity >= AssembleAFleet::MINIMAL_CARGO_CAPACITY),
         );
     }
 }

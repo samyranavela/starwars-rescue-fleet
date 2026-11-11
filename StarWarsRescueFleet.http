@@ -1,0 +1,10 @@
+# StarWars Rescue Fleet
+
+###
+# @name Assemble a Fleet
+POST {{host}}/rescueFleets
+Content-Type: application/json
+
+{
+  "numberOfPassengers": 800
+}

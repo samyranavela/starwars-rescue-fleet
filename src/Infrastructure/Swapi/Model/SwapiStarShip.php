@@ -16,13 +16,4 @@ final readonly class SwapiStarShip
     )
     {
     }
-
-    public static function fromArray(array $starship): self
-    {
-        return new self(
-            $starship['name'] ?? null,
-            $starship['passengers'] ?? null,
-            $starship['cargo_capacity'] ?? null,
-        );
-    }
 }

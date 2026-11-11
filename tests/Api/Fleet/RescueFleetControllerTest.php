@@ -11,6 +11,7 @@ use App\Tests\Support\ApiTestCase;
 use App\Tests\Support\Http\HttpFixtures;
 use PHPUnit\Framework\Attributes\Test;
 use Zenstruck\Browser\HttpOptions;
+use Zenstruck\Browser\Json;
 
 final class RescueFleetControllerTest extends ApiTestCase
 {
@@ -22,6 +23,13 @@ final class RescueFleetControllerTest extends ApiTestCase
             ->browser()
             ->post('rescueFleets', HttpOptions::json(['numberOfPassengers' => 5]))
             ->assertStatus(201)
+            ->use(
+                fn (Json $json)
+                    => self::assertResponseHeaderSame(
+                    'Location',
+                    sprintf('/rescueFleets/%s', $json->search('id')),
+                ),
+            )
             ->json()
             ->assertHas('id')
             ->assertMatches('length(starships)', 1)
