@@ -19,8 +19,14 @@
     </php>
 
     <testsuites>
-        <testsuite name="Project Test Suite">
-            <directory>tests</directory>
+        <testsuite name="integration">
+            <directory>tests/Integration</directory>
+        </testsuite>
+        <testsuite name="functional">
+            <directory>tests/Functional</directory>
+        </testsuite>
+        <testsuite name="api">
+            <directory>tests/Api</directory>
         </testsuite>
     </testsuites>
 
@@ -42,5 +48,6 @@
 
     <extensions>
         <bootstrap class="Zenstruck\Browser\Test\BrowserExtension" />
+        <bootstrap class="App\Tests\Support\Http\HttpFixturesExtension" />
     </extensions>
 </phpunit>

@@ -44,6 +44,10 @@ final readonly class FleetAssembler implements AssembleAFleet
         ;
 
         $rescueStarShips = Collection::empty();
+        if ($starShips->isEmpty()) {
+            return $rescueStarShips;
+        }
+
         while ($numberOfPassengers > 0) {
             $starShip = $starShips->shift();
             $numberOfPassengers -= $starShip->capacity;

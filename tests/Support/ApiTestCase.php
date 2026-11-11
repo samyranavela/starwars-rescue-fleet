@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Helper;
+namespace App\Tests\Support;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Zenstruck\Browser\Test\HasBrowser;

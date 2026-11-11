@@ -2,17 +2,21 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Functional\UI\API\Fleet;
+namespace App\Tests\Api\Fleet;
 
 use App\Domain\Fleet\Fleet;
 use App\Domain\Fleet\Fleets;
 use App\Domain\Fleet\StarShip;
-use App\Tests\Helper\ApiTestCase;
+use App\Tests\Support\ApiTestCase;
+use App\Tests\Support\Http\HttpFixtures;
+use PHPUnit\Framework\Attributes\Test;
 use Zenstruck\Browser\HttpOptions;
 
 final class RescueFleetControllerTest extends ApiTestCase
 {
-    public function testShouldAssembleARescueFleet(): void
+    #[Test]
+    #[HttpFixtures('swapi/starships')]
+    public function should_assemble_a_rescue_fleet(): void
     {
         $this
             ->browser()
@@ -26,16 +30,16 @@ final class RescueFleetControllerTest extends ApiTestCase
         ;
     }
 
-    public function testShouldReturnAFleetGivenAnId(): void
+    #[Test]
+    public function should_return_a_fleet_given_an_id(): void
     {
         $browser = $this->browser();
         $fleets = $browser->client()->getContainer()->get(Fleets::class);
 
-        $fleet = $fleets->save(
-            Fleet::from(
-                collect([new Starship('Millennium Falcon', 6, 100000)]),
-            ),
-        );
+        $fleet = [new Starship('Millennium Falcon', 6, 100000)]
+                |> collect(...)
+                |> Fleet::from(...)
+                |> $fleets->save(...);
 
         $starship = $fleet->starships->first();
 

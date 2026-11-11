@@ -4,34 +4,25 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Application\Fleet;
 
-use App\Application\Fleet\FleetAssembler;
 use App\Domain\Fleet\AssembleAFleet;
 use App\Domain\Fleet\Fleet;
+use App\Domain\Fleet\Fleets;
 use App\Domain\Fleet\StarShip;
-use App\Infrastructure\Persistence\InMemory\InMemoryFleets;
-use App\Infrastructure\Persistence\InMemory\StarShipInventoryStub;
+use App\Tests\Support\Http\HttpFixtures;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Constraint\Callback;
-use PHPUnit\Framework\TestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-final class AssembleAFleetTest extends TestCase
+final class AssembleAFleetTest extends KernelTestCase
 {
-    public function testShouldAssembleAFleetFor1050Passengers(): void
+    #[Test]
+    #[HttpFixtures('swapi/various_sizes')]
+    public function should_assemble_a_fleet_for_1050_passengers(): void
     {
-        $starShips = collect([
-            new StarShip("no-passenger-ship", 0, 0),
-            new StarShip("xs", 10, 1000),
-            new StarShip("s", 50, 50000),
-            new StarShip("m", 200, 70000),
-            new StarShip("l", 800, 150000),
-            new StarShip("xl", 2000, 500000),
-        ]);
         $numberOfPassengers = 1050;
 
-        $fleets = new InMemoryFleets();
-        $assembleAFleet = new FleetAssembler(
-            new StarShipInventoryStub($starShips),
-            $fleets,
-        );
+        $fleets = self::getContainer()->get(Fleets::class);
+        $assembleAFleet = self::getContainer()->get(AssembleAFleet::class);
 
         $fleet = $assembleAFleet->forPassengers($numberOfPassengers);
 

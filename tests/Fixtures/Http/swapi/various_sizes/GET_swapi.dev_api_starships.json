@@ -1,0 +1,52 @@
+{
+    "status": 200,
+    "body": {
+        "count": 6,
+        "next": null,
+        "previous": null,
+        "results": [
+            {
+                "name": "no-passenger-ship",
+                "model": "no-passenger-ship",
+                "passengers": "0",
+                "cargo_capacity": "0",
+                "url": "https://swapi.dev/api/starships/1/"
+            },
+            {
+                "name": "xs",
+                "model": "xs",
+                "passengers": "10",
+                "cargo_capacity": "1000",
+                "url": "https://swapi.dev/api/starships/2/"
+            },
+            {
+                "name": "s",
+                "model": "s",
+                "passengers": "50",
+                "cargo_capacity": "50000",
+                "url": "https://swapi.dev/api/starships/3/"
+            },
+            {
+                "name": "m",
+                "model": "m",
+                "passengers": "200",
+                "cargo_capacity": "70000",
+                "url": "https://swapi.dev/api/starships/4/"
+            },
+            {
+                "name": "l",
+                "model": "l",
+                "passengers": "800",
+                "cargo_capacity": "150000",
+                "url": "https://swapi.dev/api/starships/5/"
+            },
+            {
+                "name": "xl",
+                "model": "xl",
+                "passengers": "2000",
+                "cargo_capacity": "500000",
+                "url": "https://swapi.dev/api/starships/6/"
+            }
+        ]
+    }
+}
